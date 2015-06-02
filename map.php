@@ -170,7 +170,7 @@ var featureOverlay = new ol.FeatureOverlay({
 }
 });
 
- 
+ //adding some comments
 var styleFunction = function(feature) {
     var hexColor = feature.get('fill_color');
     var color = ol.color.asArray(hexColor);

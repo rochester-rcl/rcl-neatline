@@ -229,7 +229,7 @@ var styleFunction = function(feature) {
     
     $( "#layerlist" ).append(new_layer);
     
-    
+    //adding some comments in here
     //$( "#layerlist" ).append( "<div class='foo'><input id=\"" + layerName + "\" type=\"checkbox\"/>" + layerName + "</div>" );
 
 	var visible = new ol.dom.Input($( "#layerlist input" ).get($( "#layerlist input" ).length - 1));
