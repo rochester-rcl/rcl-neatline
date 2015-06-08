@@ -4,7 +4,7 @@
   <head>
      <link rel="stylesheet" href="http://openlayers.org/en/v3.1.0/css/ol.css" type="text/css">
      <link rel="stylesheet" href="neatline_mapper.css" type="text/css">
-    <script src="http://openlayers.org/en/v3.4.0/build/ol.js" type="text/javascript"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.5.0/ol.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>Introduction to Modern Architecture</title>
   </head>
@@ -121,9 +121,6 @@ var tmp = setTimeout(function(){
 	visible: true 
         });
         
-
-var format = new ol.format.WKT();
-
 var view = new ol.View({
   center: [0, 5000000],
   zoom: 3
@@ -204,7 +201,6 @@ var styleFunction = function(feature) {
 
   
   function newLayerAdded(layerName, desc, layer) {
-    //$( "#layerlist" ).append( "<input id=\"" + layerName + "\" type=\"checkbox\"/>" + layerName + "<br>" );
     var new_layer = document.createElement( 'div' );
     new_layer.setAttribute("class", "layer");
     new_layer.setAttribute("id", layerName);
@@ -213,17 +209,15 @@ var styleFunction = function(feature) {
     new_checkbox.setAttribute("id", layerName);
     new_checkbox.setAttribute("class", "layer_check");
     var new_layerlabel = document.createTextNode(layerName);
-    //new_layer.appendChild(new_checkbox);
     $( "#layerlist" ).append(new_checkbox);
     new_layer.appendChild(new_layerlabel);
     
     $( "#layerlist" ).append(new_layer);
-    
-    
-    //$( "#layerlist" ).append( "<div class='foo'><input id=\"" + layerName + "\" type=\"checkbox\"/>" + layerName + "</div>" );
-
-	var visible = new ol.dom.Input($( "#layerlist input" ).get($( "#layerlist input" ).length - 1));
-    visible.bindTo('checked', layer, 'visible');
+    var visible = $(new_checkbox);
+    visible.on('change', function() {
+    layer.setVisible(this.checked);
+  });
+  visible.prop('checked', layer.getVisible());
   }
   
     $.getJSON( "get_layers.php", function( data ) {
@@ -232,17 +226,18 @@ var styleFunction = function(feature) {
         $.each( data, function( key, val ) {
                 $url = "get_records.php?eid[]=" + val["id"];
                 $.get($url, function( NeatlineExhibits) {
-                        datasource = new ol.source.GeoJSON(
-                        /** @type {olx.source.GeoJSONOptions} */ ({
-                        object: NeatlineExhibits
-                        }));
+                  console.log (NeatlineExhibits);
+                    
+                    var vectorSource = new ol.source.Vector({
+                  features: (new ol.format.GeoJSON()).readFeatures(NeatlineExhibits)
+                    });
                     
                     var myLayer = new ol.layer.Vector({
-                    source: datasource,
+                     source: vectorSource,
                     exhibitname: val["title"],
                     style: styleFunction
                     });
-                    
+    
                     map.addLayer(myLayer);
                     tmp = val["title"];
                     ed[tmp] = val["narrative"];
