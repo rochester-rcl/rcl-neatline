@@ -1,6 +1,6 @@
 
 <?php
-include_once('libs/geoPHP/geoPHP.inc');
+include_once('lib/geoPHP/geoPHP.inc');
 include('config.php');
 //geophp_load();
 
