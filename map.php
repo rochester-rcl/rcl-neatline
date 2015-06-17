@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!doctype html>
+
 <html lang="en">
     <head>
         <link rel="stylesheet" href="http://openlayers.org/en/v3.1.0/css/ol.css" type="text/css">
