@@ -14,7 +14,22 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
 
-$sel = "SELECT omeka_neatline_records.id, omeka_neatline_records.item_title, omeka_neatline_records.item_id, omeka_neatline_records.fill_color_select, omeka_neatline_records.stroke_color_select, omeka_neatline_records.fill_opacity_select, omeka_neatline_records.stroke_opacity_select, omeka_neatline_records.stroke_width, omeka_neatline_records.point_radius, omeka_neatline_records.fill_color, omeka_neatline_records.fill_opacity, omeka_neatline_records.stroke_color, asText(omeka_neatline_records.coverage),omeka_neatline_exhibits.title, omeka_neatline_exhibits.id
+$sel = "SELECT omeka_neatline_records.id, 
+    omeka_neatline_records.item_title, 
+    omeka_neatline_records.item_id, 
+    omeka_neatline_records.fill_color_select, 
+    omeka_neatline_records.stroke_color_select, 
+    omeka_neatline_records.fill_opacity_select, 
+    omeka_neatline_records.stroke_opacity_select, 
+    omeka_neatline_records.stroke_width, 
+    omeka_neatline_records.point_radius, 
+    omeka_neatline_records.point_image,
+    omeka_neatline_records.fill_color, 
+    omeka_neatline_records.fill_opacity, 
+    omeka_neatline_records.stroke_color, 
+    asText(omeka_neatline_records.coverage),
+    omeka_neatline_exhibits.title, 
+    omeka_neatline_exhibits.id
         FROM omeka_neatline_records
         LEFT JOIN omeka_neatline_exhibits
         ON omeka_neatline_records.exhibit_id=omeka_neatline_exhibits.id
@@ -46,7 +61,18 @@ function addGeo ($currentGeo, $lt, $props){
       $g = geoPHP::load($currentRow['asText(omeka_neatline_records.coverage)'],'wkt');
 //print ($g);    
   $g1 = $g->out('json');
-    $props = array('fid' => $currentRow['item_id'], 'fill_color_select' => $currentRow['fill_color_select'], 'fill_opacity_select' => $currentRow['fill_opacity_select'], 'stroke_color_select' => $currentRow['stroke_color_select'], 'stroke_opacity_select' => $currentRow['stroke_opacity_select'], 'item_title' => $currentRow['item_title'], 'stroke_width' => $currentRow['stroke_width'],  'point_radius' => $currentRow['point_radius'], 'fill_color' => $currentRow['fill_color'], 'stroke_color'=>$currentRow['stroke_color'], 'fill_opacity'=>$currentRow['fill_opacity']);
+    $props = array('fid' => $currentRow['item_id'], 
+        'fill_color_select' => $currentRow['fill_color_select'], 
+        'fill_opacity_select' => $currentRow['fill_opacity_select'], 
+        'stroke_color_select' => $currentRow['stroke_color_select'], 
+        'stroke_opacity_select' => $currentRow['stroke_opacity_select'], 
+        'item_title' => $currentRow['item_title'], 
+        'stroke_width' => $currentRow['stroke_width'],  
+        'point_radius' => $currentRow['point_radius'], 
+        'fill_color' => $currentRow['fill_color'], 
+        'point_image'=>$currentRow['point_image'],
+        'stroke_color'=>$currentRow['stroke_color'], 
+        'fill_opacity'=>$currentRow['fill_opacity']);
     $finaljson = $finaljson . addGeo($g1, $indx, $props);
     $indx = $indx + 1;
   }
