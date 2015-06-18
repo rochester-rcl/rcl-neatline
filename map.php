@@ -4,16 +4,13 @@
     <head>
         <link rel="stylesheet" href="http://openlayers.org/en/v3.1.0/css/ol.css" type="text/css">
         <link rel="stylesheet" href="neatline_mapper.css" type="text/css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.5.0/ol.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
         <title>Introduction to Modern Architecture</title>
     </head>
 
     <body>
-        <!--<div id="loadingcont">
-        <div id="loading">LOADING</div>
-        </div>-->
         <div id="map" class="map">
             <div id="title"> <div id="title_box">  Introduction to Modern Architecture</div></div>
             <div id="titlepopup">
