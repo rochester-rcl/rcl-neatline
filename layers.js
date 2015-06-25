@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
     //attibution giving esri credit for their data
     var attribution = new ol.Attribution({
     html: 'Tiles &copy; <a href="http://services.arcgisonline.com/ArcGIS/' +

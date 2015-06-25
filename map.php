@@ -12,6 +12,7 @@
 
     <body>
         <div id="map" class="map">
+            <input type="text" id="filter"><div id="filterbutton">X</div>
             <div id="title"> <div id="title_box">  Introduction to Modern Architecture</div></div>
             <div id="titlepopup">
                 <div id="titlecontent"></div>
@@ -52,6 +53,12 @@
                 var highlight;
                 getLayers();
 //               
+                $("#filterbutton").click(
+                        function () {
+                            //$( "#infopopup" ).hide(); 
+                map.renderSync();
+                        });
+        
                 $("#closer").click(
                         function () {
                             //$( "#infopopup" ).hide(); 

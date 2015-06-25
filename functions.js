@@ -35,10 +35,22 @@ function getLayers() {
     $.getJSON("get_layers.php", function (data) {//call the script that will get the json from the mysql database
         $.each(data, function (key, val) { //loop through the 
             $url = "get_records.php?eid[]=" + val["id"];
+           
             $.get($url, function (NeatlineExhibits) {
-                var vectorSource = new ol.source.Vector({
-                    features: (new ol.format.GeoJSON()).readFeatures(NeatlineExhibits)
+               
+                var tmp = JSON.parse(NeatlineExhibits);
+               
+                tmp.features = $.grep(tmp.features, function(element, index){
+                    return element.properties.fid == $("#filter").val();
                 });
+                
+                console.log(tmp.features);
+          
+                var vectorSource = new ol.source.Vector({
+                    //features: (new ol.format.GeoJSON()).readFeatures(NeatlineExhibits)
+                    features: (new ol.format.GeoJSON()).readFeatures(tmp)
+                });
+                
                 var myLayer = new ol.layer.Vector({
                     source: vectorSource,
                     exhibitname: val["title"],
