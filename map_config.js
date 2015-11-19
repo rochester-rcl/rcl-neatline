@@ -4,8 +4,13 @@ var view = new ol.View({
   zoom: 3
 });
 //set up the map and add the base layers
+var baseLayers = addBaseLayers();
 var map = new ol.Map({
-  layers: [WC, toner, OSM, ESRI],
+  layers: [baseLayers],
   target: 'map',
   view: view
 });
+var exhibitLayers = getLayers();
+
+console.log(exhibitLayers);
+

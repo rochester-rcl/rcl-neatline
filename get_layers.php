@@ -7,7 +7,9 @@ try {
     $stmt = $conn->query('SELECT DISTINCT exhibit_id FROM omeka_neatline_records');
     $row1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($row1 as $key => $value){
+        if(! in_array($value["exhibit_id"], $excludeExhibits)){
         $ev[] = $value["exhibit_id"];
+        }
     }
     $evstring = implode(",", $ev);
 }

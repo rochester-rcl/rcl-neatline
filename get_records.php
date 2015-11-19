@@ -1,9 +1,6 @@
-
 <?php
 include_once('lib/geoPHP/geoPHP.inc');
 include('config.php');
-//geophp_load();
-
 
 if ($_GET){
     $in_statement = implode(",", $_GET[eid]);
@@ -13,7 +10,6 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-
 $sel = "SELECT omeka_neatline_records.id, 
     omeka_neatline_records.item_title, 
     omeka_neatline_records.item_id, 
@@ -24,6 +20,10 @@ $sel = "SELECT omeka_neatline_records.id,
     omeka_neatline_records.stroke_width, 
     omeka_neatline_records.point_radius, 
     omeka_neatline_records.point_image,
+    omeka_neatline_records.start_date, 
+    omeka_neatline_records.end_date, 
+    omeka_neatline_records.before_date, 
+    omeka_neatline_records.after_date,
     omeka_neatline_records.fill_color, 
     omeka_neatline_records.fill_opacity, 
     omeka_neatline_records.stroke_color, 
@@ -50,7 +50,6 @@ function addGeo ($currentGeo, $lt, $props){
          $startjson =  '{
         "type": "FeatureCollection", 
         "features": [';  
-            
         $endjson = ']}';
   
   $finaljson = $startjson;
@@ -71,13 +70,17 @@ function addGeo ($currentGeo, $lt, $props){
         'point_radius' => $currentRow['point_radius'], 
         'fill_color' => $currentRow['fill_color'], 
         'point_image'=>$currentRow['point_image'],
-        'stroke_color'=>$currentRow['stroke_color'], 
+        'stroke_color'=>$currentRow['stroke_color'],
+       'start_date' => $currentRow['start_date'], 
+        'end_date' => $currentRow['end_date'], 
+        'before_date'=>$currentRow['before_date'],
+        'after_date'=>$currentRow['after_date'],
         'fill_opacity'=>$currentRow['fill_opacity']);
     $finaljson = $finaljson . addGeo($g1, $indx, $props);
     $indx = $indx + 1;
   }
   $finaljson = $finaljson . $endjson;
-           
+  
 print ($finaljson);
 
     }

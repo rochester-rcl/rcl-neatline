@@ -21,7 +21,7 @@ var featureOverlay = new ol.FeatureOverlay({
             imgSize: [feature.get('point_radius'), feature.get('point_radius')],
             img: myImg
         }));
-      console.log("put some code here to leave the image");
+      //console.log("put some code here to leave the image");
         }else{
             myImg = new ol.style.Circle({
                     radius:feature.get('point_radius'),
@@ -37,7 +37,7 @@ var featureOverlay = new ol.FeatureOverlay({
                 fill: new ol.style.Fill({
                     color: color
                 }),
-                //image:myImg
+                image:myImg,
                 stroke: new ol.style.Stroke({
                     color: feature.get('stroke_color')
                 })
@@ -48,6 +48,8 @@ var featureOverlay = new ol.FeatureOverlay({
 //setting up the style function for the features.  This gets the values from the features and uses it 
 //to style the layers
 var styleFunction = function (feature) {
+    
+
     var hexColor = feature.get('fill_color');
     var color = ol.color.asArray(hexColor);
     color = color.slice();
@@ -64,7 +66,7 @@ var styleFunction = function (feature) {
             imgSize: [feature.get('point_radius'), feature.get('point_radius')],
             img: myImg
         }));
-        console.log(feature.get('point_image'));
+        //console.log(feature.get('point_image'));
     } else {
         myImage = new ol.style.Circle({
             radius: feature.get('point_radius'),
@@ -76,7 +78,11 @@ var styleFunction = function (feature) {
             }),
         });
     }
-
+    if (feature.get('hidden')){
+        console.log("setting style to null");
+       return null;
+   }else{
+        console.log("setting the style properly");
     return [new ol.style.Style({
             fill: new ol.style.Fill({
                 color: color
@@ -86,4 +92,6 @@ var styleFunction = function (feature) {
                 color: feature.get('stroke_color')
             })
         })];
+}
+
 };

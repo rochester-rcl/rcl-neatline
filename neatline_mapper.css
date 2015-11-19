@@ -12,6 +12,21 @@ body{
     border:0;
 }
 
+
+
+#visualization{
+   // display: block;
+   position: fixed;
+    font-weight: bold;
+    bottom:5px;
+    width: 600px;
+    right:10px;
+    z-index: 5;
+    background: #DAE2E8;
+    opacity: .8;
+    }
+
+    
 #title_box{
     padding: 10px 10px 10px 10px; 
     border-radius: 5px;
@@ -20,7 +35,7 @@ body{
     height: auto;
 }
 
-#title{
+#pagetitle{
     display: block;
     font-family: sans-serif;
      text-transform: uppercase;
@@ -34,7 +49,7 @@ body{
     
 #layercontainer {
     position: absolute;
-    top: 0px;
+    top: 5px;
     right: 10px;
     z-index: 1;
 }
@@ -65,7 +80,6 @@ body{
     z-index: 1;
     
 }
-
 
 #infopopup {
     position: absolute;
@@ -108,27 +122,39 @@ overflow:hidden;
 
 #closer {
     position: absolute;
-    font-family: sans-serif;
-    top: 10px;
-    right: 10px;
+    //font-family: sans-serif;
+    top: 0px;
+    left: 270px;
     cursor: pointer;
-    border: 1px solid #a1a1a1;
-    border-radius: 5px;
-    padding: 2px 4px 2px 4px;
-    height: auto;
-    vertical-align: middle;
-    color: #a1a1a1;
-    cursor: pointer;
+    //border: 1px solid #a1a1a1;
+    //border-radius: 5px;
+    //padding: 2px 4px 2px 4px;
+    opacity: 1;
+    //height: auto;
+    //vertical-align: middle;
+    //color: #a1a1a1;
+    //cursor: pointer;
     z-index: 20;
 }
 
+*.fa-circle{
+    color: #DAE2E8;
+}
+
+*.fa-circle-thin{
+    color: #a1a1a1;
+}
+
+*.fa-close{
+    color: dimgray;
+}
 #min{
     position: absolute;
     font-weight: bold;
     top: 10px;
     right: 10px;
     cursor: pointer;
-    border: 1px solid #a1a1a1;
+    //border: 1px solid #a1a1a1;
     border-radius: 5px;
     padding: 2px 5px 2px 5px;
     color: #a1a1a1;
@@ -140,7 +166,7 @@ overflow:hidden;
     top: 10px;
     right: 10px;
     cursor: pointer;
-    border: 1px solid #a1a1a1;
+    //border: 1px solid #a1a1a1;
     border-radius: 5px;
     padding: 2px 4px 2px 4px;
     color: #a1a1a1;
