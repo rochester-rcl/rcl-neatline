@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php 
+<?php
 include('config.php');
 ?>
 <html lang="en">
@@ -9,34 +9,34 @@ include('config.php');
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.9.0/vis.min.css">
         <link rel="stylesheet" href="neatline_mapper.css" type="text/css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.9.0/vis.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.11.0/ol.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-       
+
         <title>
-            
+<?php echo $pagetitle ?>
         </title>
     </head>
 
     <body>
         <div id="map" class="map">
-            
+
             <?php
-         include ('filtering.php');
-           ?>
-            
+            include ('filtering.php');
+            ?>
+
             <div id="pagetitle"> <div id="title_box">  
-              <?php echo $pagetitle ?>
+                    <?php echo $pagetitle ?>
                 </div></div>
-            
+
             <div id="titlepopup">
                 <div id="titlecontent"></div>
             </div>
-            
-       <div id="closer"><span class="fa-stack">
-  <i class="fa fa-circle fa-stack-2x"></i>
-  <i class="fa fa-circle-thin fa-stack-2x"></i>
-  <i class="fa fa-close fa-stack-1x"></i>
-</span></div>
+
+            <div id="closer"><span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-close fa-stack-1x"></i>
+                </span></div>
             <div id="infopopup">
                 <div>
                     <div id="popcontent"></div>
@@ -57,13 +57,7 @@ include('config.php');
             </div>
         </div>
         <div id="visualization"></div>
-        <!--
-        <script src="functions.js"></script>
-        <script src="layers.js"></script>
-        <script src="map_config.js"></script>
-        <script src="style_functions.js"></script>
-        <script src="thetimeline.js"></script>-->
-
+      
         <script type="text/javascript">
 
             $(document).ready(function () {
@@ -74,19 +68,19 @@ include('config.php');
                 $("#max").hide();
 
                 var highlight;
-          
+
                 $("#rmvlayersbutton").click(
-                        function () { 
-                        clearLayers();
+                        function () {
+                            clearLayers();
                         });
-                        
+
                 $("#filterbutton").click(
                         function () {
-                        lTl();
+                            lTl();
                         });
-                        
-                       // });
-        
+
+                // });
+
                 $("#closer").click(
                         function () {
                             //$( "#infopopup" ).hide(); 
@@ -112,7 +106,7 @@ include('config.php');
                 $("#layerlist").on({
                     mouseenter: function () {
                         if (ed[this.id] && $('#infopopup').css('display') === "none") {
-                            $("#titlepopup").delay( 800 ).fadeIn( 400 );
+                            $("#titlepopup").delay(800).fadeIn(400);
                             $("#titlecontent").html(ed[this.id]);
                         }
                     },
@@ -128,10 +122,10 @@ include('config.php');
 
                     if (feature !== highlight) {
                         if (highlight) {
-                            featureOverlay.removeFeature(highlight);
+                            featureOverlay.getSource().removeFeature(highlight);
                         }
                         if (feature) {
-                            featureOverlay.addFeature(feature);
+                            featureOverlay.getSource().addFeature(feature);
                         }
                         highlight = feature;
                     }
@@ -171,7 +165,7 @@ include('config.php');
                         }
                     }
                 });
-                
+
             });
 
         </script>
@@ -180,6 +174,6 @@ include('config.php');
         <script src="layers.js"></script>
         <script src="map_config.js"></script>
         <script src="style_functions.js"></script>
- 
+
     </body>
 </html>

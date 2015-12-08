@@ -47,7 +47,9 @@ var osm = new ol.layer.Tile({
     isBase: true
 });
     var baseGroup = new ol.layer.Group({
-    layers: [esri,toner,wc,osm]
+    layers: [esri,toner,wc,osm],
+    name: "Base Layers",
+    opacity: .5
     });
     return baseGroup;
  }

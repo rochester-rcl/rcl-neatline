@@ -26,58 +26,40 @@ function clearLayers(){
     }
 }
 
-function loadFeatures(data){
-    clearLayers();
-    var exhibitGroup = new ol.layer.Group();
-    var exhibitCollection = new ol.Collection();
- $.each(data, function (key, val) { //loop through the 
+function getLayers() {
+    //var exhibitGroup = new ol.layer.Group();
+    //exhibitGroup.set("group_name", "exhibits");
+    //var eC = new ol.Collection();
+    $.getJSON("get_layers.php", function (data) {//call the script that will get the json from the mysql database
+
+        
+        $.each(data, function (key, val) { //loop through the 
             $url = "get_records.php?eid[]=" + val["id"];
             $.get($url, function (NeatlineExhibits) {
                 var tmp = JSON.parse(NeatlineExhibits);
-                if($("#textfilter").val()){
-                tmp.features = $.grep(tmp.features, function(element, index){
-                    return element.properties.fid == $("#textfilter").val(); //filter the records in the set
-                    
-                });
-            }else{
-                tmp = NeatlineExhibits;  
-            }
-          
+
                 var vectorSource = new ol.source.Vector({
-                    //features: (new ol.format.GeoJSON()).readFeatures(NeatlineExhibits)
                     features: (new ol.format.GeoJSON()).readFeatures(tmp)
                 });
-               
+
                 var myLayer = new ol.layer.Vector({
+                    group: "exhibits",
                     source: vectorSource,
                     exhibitname: val["title"],
-                    style:  styleFunction
-                            /*function(feature, resolution) { 
-                                if (feature.get('hidden')) { 
-                                return null; 
-                                }else { 
-                                return styles; 
-                                } 
-                            } */
+                    style: styleFunction
                 });
-                exhibitCollection.push(myLayer);
+                
+                //eC.push(myLayer);
                 map.addLayer(myLayer);
                 tmp_title = val["title"];
                 ed[tmp_title] = val["narrative"];
                 newLayerAdded(val["title"], val["narrative"], myLayer);
             });
-        });  
-        exhibitGroup.setLayers(exhibitCollection);
-        return exhibitGroup;
-}
-
-function getLayers() {
-    $.getJSON("get_layers.php", function (data) {//call the script that will get the json from the mysql database
-            exhibitLayers = loadFeatures(data);
-           
-            return exhibitLayers;
-//       
+        });
+       // exhibitGroup.setLayers(eC);
+        
     });
+    //return eC;
 }
 
 function newLayerAdded(layerName, desc, layer) {

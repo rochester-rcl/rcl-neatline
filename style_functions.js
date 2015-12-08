@@ -1,43 +1,45 @@
 //set up the feature overlay  and styles so that feature highlight properly
-var featureOverlay = new ol.FeatureOverlay({
+//var featureOverlay = new ol.FeatureOverlay({
+var featureOverlay = new ol.layer.Vector({
+    source: new ol.source.Vector(),
     map: map,
     style: function (feature) {
-        if(feature.get('fill_color_select')){
-        var hexColor = feature.get('fill_color_select');
-        var color = ol.color.asArray(hexColor);
-        color = color.slice();
-        color[3] = feature.get('fill_opacity_select'); // change the alpha of the color
-        var sc = feature.get('stroke_color_select')
-    }
+        if (feature.get('fill_color_select')) {
+            var hexColor = feature.get('fill_color_select');
+            var color = ol.color.asArray(hexColor);
+            color = color.slice();
+            color[3] = feature.get('fill_opacity_select'); // change the alpha of the color
+            var sc = feature.get('stroke_color_select')
+        }
         //this conditional tests if the feature is represented by an image file and sets 
         //the style appropriately
         if (feature.get('point_image')) {
-       var myImg = new Image();
-        myImg.src = feature.get('point_image');
-        var myImage = new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-            opacity: color[3],
-            offset: [0, 0],
-            scale: 1,
-            imgSize: [feature.get('point_radius'), feature.get('point_radius')],
-            img: myImg
-        }));
-      //console.log("put some code here to leave the image");
-        }else{
+            var myImg = new Image();
+            myImg.src = feature.get('point_image');
+            var myImage = new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+                opacity: color[3],
+                offset: [0, 0],
+                scale: 1,
+                imgSize: [feature.get('point_radius'), feature.get('point_radius')],
+                img: myImg
+            }));
+            //console.log("put some code here to leave the image");
+        } else {
             myImg = new ol.style.Circle({
-                    radius:feature.get('point_radius'),
-                    stroke: new ol.style.Stroke({
-                        color: feature.get('stroke_color_select')
-                    }),
-                    fill: new ol.style.Fill({
-                        color: color
-                    }),
-                });
-            }   
+                radius: feature.get('point_radius'),
+                stroke: new ol.style.Stroke({
+                    color: feature.get('stroke_color_select')
+                }),
+                fill: new ol.style.Fill({
+                    color: color
+                }),
+            });
+        }
         return [new ol.style.Style({
                 fill: new ol.style.Fill({
                     color: color
                 }),
-                image:myImg,
+                image: myImg,
                 stroke: new ol.style.Stroke({
                     color: feature.get('stroke_color')
                 })
@@ -48,7 +50,7 @@ var featureOverlay = new ol.FeatureOverlay({
 //setting up the style function for the features.  This gets the values from the features and uses it 
 //to style the layers
 var styleFunction = function (feature) {
-    
+
 
     var hexColor = feature.get('fill_color');
     var color = ol.color.asArray(hexColor);
@@ -78,20 +80,20 @@ var styleFunction = function (feature) {
             }),
         });
     }
-    if (feature.get('hidden')){
+    if (feature.get('hidden')) {
         console.log("setting style to null");
-       return null;
-   }else{
+        return null;
+    } else {
         console.log("setting the style properly");
-    return [new ol.style.Style({
-            fill: new ol.style.Fill({
-                color: color
-            }),
-            image: myImage,
-            stroke: new ol.style.Stroke({
-                color: feature.get('stroke_color')
-            })
-        })];
-}
+        return [new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: color
+                }),
+                image: myImage,
+                stroke: new ol.style.Stroke({
+                    color: feature.get('stroke_color')
+                })
+            })];
+    }
 
 };
