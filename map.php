@@ -21,7 +21,7 @@ include('config.php');
         <div id="map" class="map">
 
             <?php
-            include ('filtering.php');
+            //include ('filtering.php');
             ?>
 
             <div id="pagetitle"> <div id="title_box">  
@@ -47,10 +47,7 @@ include('config.php');
                 <div id="max" title="Show Layers"><i class="fa fa-plus-square"></i></div>
                 <div id="layerlist">
                     <div class="layer_heading">Base Layers</div>
-                    <input type="radio" name="base" value="osm" class="base" checked="true">Open Streetmap<br>
-                    <input type="radio" name="base" value="esri" class="base">ESRI<br>
-                    <input type="radio" name="base" value="wc" class="base" >Stamen Watercolor<br>
-                    <input type="radio" name="base" value="toner" class="base">Stamen Toner<br>
+                     <div id="baselist"></div>
                     <div class="layer_heading">Exhibits</div>
                     <div id="exhibitlist"></div>
                 </div>
@@ -165,9 +162,15 @@ include('config.php');
                         }
                     }
                 });
-
+            //window.onload = lTl;
+            window.setTimeout(lTl, 100);
+             $(".base").change(function () {
+             console.log("it changed");
+                blToggle($("input:radio[name=base]:checked").val());
+                });
             });
 
+            
         </script>
         <script src="thetimeline.js"></script>
         <script src="functions.js"></script>

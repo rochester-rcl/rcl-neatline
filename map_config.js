@@ -1,5 +1,3 @@
-//set up the view
-
 var view = new ol.View({
   center: [0, 5000000],
   zoom: 3
@@ -7,14 +5,11 @@ var view = new ol.View({
 //set up the map and add the base layers
 var baseLayers = addBaseLayers();
 
-
 var map = new ol.Map({
   target: 'map',
   view: view
 });
 
-var eL = getLayers();
+getLayers();
 map.addLayer(baseLayers);
-//console.log(eL);
-//map.addLayer(eL);
-map.getLayerGroup();
+//setTimeout(lTl, 3000);

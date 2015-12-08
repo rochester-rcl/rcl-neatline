@@ -22,9 +22,7 @@ function lTl() {
                 }
                 ;
             });
-        }
-        ;
-
+        };
     });
 
     var container = document.getElementById('visualization');

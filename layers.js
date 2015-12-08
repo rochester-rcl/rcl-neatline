@@ -17,7 +17,7 @@ var esri = new ol.layer.Tile({
     exhibitname: "esri",
     isBase: true
 });
-
+newBaseAdded("ESRI", "esri", esri, "base", "radio");
 //configure the stamen toner layer
 var toner = new ol.layer.Tile({
     source: new ol.source.Stamen({
@@ -27,7 +27,7 @@ var toner = new ol.layer.Tile({
     exhibitname: "toner",
     isBase: true
 });
-
+newBaseAdded("Stamen Toner", "toner", toner, "base", "radio");
 //configure the stamen watercolor layer
 var wc = new ol.layer.Tile({
     source: new ol.source.Stamen({
@@ -37,7 +37,7 @@ var wc = new ol.layer.Tile({
     exhibitname: "wc",
     isBase: true
 });
-
+newBaseAdded("Stamen Watercolor", "wc", wc, "base", "radio");
 //configure the stamen Open Street Map layer
 var osm = new ol.layer.Tile({
     source: new ol.source.OSM(),
@@ -46,6 +46,8 @@ var osm = new ol.layer.Tile({
     visible: true,
     isBase: true
 });
+newBaseAdded("Open Street Map", "osm", osm, "base", "radio");
+
     var baseGroup = new ol.layer.Group({
     layers: [esri,toner,wc,osm],
     name: "Base Layers",
@@ -53,3 +55,4 @@ var osm = new ol.layer.Tile({
     });
     return baseGroup;
  }
+ 
